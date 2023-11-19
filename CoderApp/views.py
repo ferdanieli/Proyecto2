@@ -7,14 +7,16 @@ def mostrar_cursos(request):
     contexto = {
         'cursos': cursos
     }
-    return render(request, 'CoderApp/cursos.html', contexto )
+    return render(request, 'CoderApp/cursos.html', contexto)
 
 def crear_curso(request):
-    curso = Curso(nombre="Python", camada=23800)
+    curso = Curso(nombre="Python", camada=47785)
     curso.save()
+    contexto = {"curso": curso}
 
-    # return redirect("/app/cursos/") # get
+    return render(request, 'index.html', contexto)
 
 def show_html(request):
-    contexto = {}
+    curso = Curso.objects.first()
+    contexto = {"curso": curso, "nombre": "Fer"}
     return render(request, 'index.html', contexto)
