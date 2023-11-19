@@ -1,8 +1,8 @@
-{% extends 'index.html' %}
+{% extends 'inicio.html' %}
 
 {% block cambio %}
-    {% for curso in cursos %}
-        <h6>El curso es {{curso.nombre}} con numero de camada {{curso.camada}}</h6>
-        <hr>
-    {% endfor %}
+   {% for curso in cursos %}
+       <h6>El nombre del curso es {{ curso.nombre }} y estás en la comisión {{ curso.camada }}.</h6>
+       <hr>
+   {% endfor %}
 {% endblock %}
