@@ -1,20 +1,19 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from CoderApp.models import Curso
 
 def mostrar_cursos(request):
     cursos = Curso.objects.all()
     contexto = {
-        'cursos': cursos
+        'cursos': cursos,
+        'nombre': "Fer"
     }
     return render(request, 'CoderApp/cursos.html', contexto)
 
 def crear_curso(request):
-    curso = Curso(nombre="Python", camada=47785)
+    curso = Curso(nombre="Java", camada=65001)
     curso.save()
-    contexto = {"curso": curso}
 
-    return render(request, 'index.html', contexto)
+    return redirect("/CoderApp/cursos/") # get
 
 def show_html(request):
     curso = Curso.objects.first()

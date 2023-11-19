@@ -2,7 +2,10 @@
 
 {% block cambio %}
    {% for curso in cursos %}
-       <h6>El nombre del curso es {{ curso.nombre }} y estás en la comisión {{ curso.camada }}.</h6>
+       <h2>{{ curso.nombre }}</h2>
+       <p class="lead mb-0">
+           Comisión número {{ curso.camada }}
+       </p>
        <hr>
    {% endfor %}
 {% endblock %}

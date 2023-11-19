@@ -6,13 +6,16 @@ class Curso(models.Model):
     camada = models.IntegerField(unique=True)
 
     def __str__(self):
-        return f"Curso: {self.nombre}, Camada: {self.camada}"
+        return f" {self.nombre}, comisión: {self.camada}"
 
 
 class Estudiante(models.Model):
     nombre = models.CharField(max_length=30)
     apellido = models.CharField(max_length=30)
     email = models.EmailField()
+
+    def __str__(self):
+        return f" {self.apellido}, {self.nombre}"
 
 
 class Profesor(models.Model):

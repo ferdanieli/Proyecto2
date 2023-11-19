@@ -18,21 +18,12 @@
     </head>
     <body>
         <!-- Navigation-->
-        <nav class="navbar navbar-light bg-light static-top">
-<!-- custom -->
-
-            <div class="container">
-                <a class="navbar-brand" href="#!">Coder House</a>
-                <a class="navbar-brand" href="#!">Inicio</a>
-                <a class="navbar-brand" href="#!">Contáctenos</a>
-                <a class="btn btn-primary" href="#signup">Hola {{ nombre }}</a>
-            </div>
-        </nav>
-<!--  custom -->
-
+        {% include 'base/navigation.html' %}
+<!--        custom -->
         {% block cambio %}
             Un valor por defecto
         {% endblock %}
+
         <!-- Masthead-->
         <header class="masthead">
             <div class="container position-relative">
