@@ -1,11 +1,21 @@
 {% extends 'inicio.html' %}
 
 {% block cambio %}
-   {% for curso in cursos %}
-       <h2>{{ curso.nombre }}</h2>
-       <p class="lead mb-0">
-           Comisión número {{ curso.camada }}
-       </p>
-       <hr>
-   {% endfor %}
+<div>
+    <form action="/CoderApp/buscar/" method="GET">
+
+        {{ form.as_p }}
+
+        <input type="submit" value="Buscar">
+
+    </form>
+</div>
+
+    {% for curso in cursos %}
+        <h2>{{ curso.nombre }}</h2>
+        <p class="lead mb-0">
+            Comisión número {{ curso.camada }}
+        </p>
+        <hr>
+    {% endfor %}
 {% endblock %}

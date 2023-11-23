@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
 from CoderApp.models import Curso
-from CoderApp.forms import CursoForm
+from CoderApp.forms import CursoForm, BuscarFormCurso
 
 
 def mostrar_cursos(request):
     cursos = Curso.objects.all()
     contexto = {
         'cursos': cursos,
-        'nombre': "Fer"
+        'nombre': "Fer",
+        "form": BuscarFormCurso(),
     }
     return render(request, 'CoderApp/cursos.html', contexto)
 
@@ -17,12 +18,6 @@ def crear_curso(request):
     curso.save()
 
     return redirect("/CoderApp/cursos/")  # get
-
-
-def show_html(request):
-    curso = Curso.objects.first()
-    contexto = {"curso": curso, "nombre": "Fer"}
-    return render(request, 'index.html', contexto)
 
 
 def crear_curso_form(request):
@@ -41,3 +36,20 @@ def crear_curso_form(request):
     }
 
     return render(request, "CoderApp/crear_curso.html", contexto)
+
+def buscar_camada(request):
+    nombre = request.GET["nombre"]
+    cursos = Curso.objects.filter(nombre__icontains=nombre)
+    contexto = {
+        "cursos": cursos,
+        "nombre": "Fer",
+        "form": BuscarFormCurso(),
+    }
+
+    return render(request, "CoderApp/cursos.html", contexto)
+
+
+def show_html(request):
+    curso = Curso.objects.first()
+    contexto = {"curso": curso, "nombre": "Fer"}
+    return render(request, 'index.html', contexto)
