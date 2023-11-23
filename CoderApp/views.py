@@ -17,6 +17,8 @@ def crear_curso(request):
     curso = Curso(nombre="Java", camada=65001)
     curso.save()
 
+    contexto = {"curso": curso}
+
     return redirect("/CoderApp/cursos/")  # get
 
 
@@ -28,7 +30,7 @@ def crear_curso_form(request):
             informacion = curso_formulario.cleaned_data
             curso_crear = Curso(nombre=informacion["nombre"], camada=informacion["camada"])
             curso_crear.save()
-            return redirect("/CoderApp/cursos")
+            return redirect("/CoderApp/cursos/")
 
     curso_formulario = CursoForm()
     contexto = {
