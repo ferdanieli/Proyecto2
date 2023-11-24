@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.utils.datastructures import MultiValueDictKeyError
 from CoderApp.models import Curso
 from CoderApp.forms import CursoForm, BuscarFormCurso
 
@@ -16,8 +17,6 @@ def mostrar_cursos(request):
 def crear_curso(request):
     curso = Curso(nombre="Java", camada=65001)
     curso.save()
-
-    contexto = {"curso": curso}
 
     return redirect("/CoderApp/cursos/")  # get
 
@@ -40,15 +39,19 @@ def crear_curso_form(request):
     return render(request, "CoderApp/crear_curso.html", contexto)
 
 def buscar_camada(request):
-    nombre = request.GET["nombre"]
-    cursos = Curso.objects.filter(nombre__icontains=nombre)
-    contexto = {
-        "cursos": cursos,
-        "nombre": "Fer",
-        "form": BuscarFormCurso(),
-    }
+    try:
+       nombre = request.GET["nombre"]
+       cursos = Curso.objects.filter(nombre__icontains=nombre)
+       contexto = {
+           "cursos": cursos,
+           "nombre": "Fer",
+           "form": BuscarFormCurso(),
+       }
 
-    return render(request, "CoderApp/cursos.html", contexto)
+       return render(request, "CoderApp/cursos.html", contexto)
+
+    except MultiValueDictKeyError:
+        return redirect("/CoderApp/cursos/")
 
 
 def show_html(request):
