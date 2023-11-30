@@ -2,9 +2,6 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 
-
-# Create your views here.
-
 def login_request(request):
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
@@ -21,7 +18,7 @@ def login_request(request):
                 login(request, user)
 
 
-        return redirect('/CoderApp/Curso/list')
+        return redirect('CursoList')
 
     form = AuthenticationForm()
     contexto = {

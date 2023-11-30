@@ -1,5 +1,5 @@
 from django.urls import path
-from CoderApp.views import show_html, crear_curso, mostrar_cursos, crear_curso_form, buscar_camada, CursoList, \
+from CoderApp.views import show_html, crear_curso, crear_curso_form, buscar_camada, CursoList, \
     CursoDetalle, CursoCreacion, CursoActualizacion, CursoEliminar
 
 # CursoCreacion
@@ -8,7 +8,6 @@ urlpatterns = [
     path('show/', show_html),
     path('crear_curso/', crear_curso),
     path('curso/', crear_curso_form),
-    path('cursos/', mostrar_cursos),
     path('buscar/', buscar_camada),
     path('cursos/listar/', CursoList.as_view(), name="CursoList"),
     path('curso/<int:pk>', CursoDetalle.as_view(), name="CursoDetail"),

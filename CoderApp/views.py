@@ -40,7 +40,6 @@ def mostrar_cursos(request):
     }
     return render(request, 'CoderApp/cursos.html', contexto)
 
-
 def crear_curso(request):
     curso = Curso(nombre="Java", camada=65001)
     curso.save()
