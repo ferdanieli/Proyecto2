@@ -1,0 +1,11 @@
+{% extends 'inicio.html' %}
+
+{% block cambio %}
+
+    <p>El nombre del curso es: <b>{{curso.nombre}}</b></p>
+<p>Comisión: {{curso.camada}}</p>
+<p>
+    <a href="{% url 'CursoList' %}">Listar Cursos</a>
+</p>
+
+{% endblock %}

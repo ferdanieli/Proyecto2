@@ -1,0 +1,33 @@
+{% extends 'inicio.html' %}
+
+{% block cambio %}
+<div>
+    <form action="/CoderApp/buscar" method="GET">
+
+        <input type="text" name="nombre">
+
+        <input type="submit" value="Buscar">
+
+    </form>
+</div>
+<p>
+    <a href="{% url 'CursoCreate' %}">Crear</a>
+</p>
+
+    {% for curso in object_list %}
+        <h4>{{curso.nombre}}</h4>
+        <p class="lead mb-0">
+        <h6>Comisión {{curso.camada}}</h6>
+        </p>
+        <p>
+            <a href="{% url 'CursoDetail' curso.id %}">Detalles</a>
+        </p>
+        <p>
+            <a href="{% url 'CursoEditar' curso.id %}">Editar</a>
+        </p>
+        <p>
+            <a href="{% url 'CursoEliminar' curso.id %}">Eliminar</a>
+        </p>
+        <hr>
+    {% endfor %}
+{% endblock %}

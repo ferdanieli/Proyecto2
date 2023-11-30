@@ -1,8 +1,35 @@
 from django.shortcuts import render, redirect
 from django.utils.datastructures import MultiValueDictKeyError
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+
 from CoderApp.models import Curso
 from CoderApp.forms import CursoForm, BuscarFormCurso
 
+
+class CursoList(ListView):
+    model = Curso
+    template_name = "CoderApp/cursos_1.html"
+
+class CursoDetalle(DetailView):
+    model = Curso
+    template_name = "CoderApp/curso_detalle.html"
+
+class CursoCreacion(CreateView):
+    model = Curso
+    success_url = "/CoderApp/cursos/listar"
+    template_name = "CoderApp/crear_curso.html"
+    fields = ["nombre", "camada"]
+
+class CursoActualizacion(UpdateView):
+    model = Curso
+    success_url = "/CoderApp/cursos/listar"
+    template_name = "CoderApp/crear_curso.html"
+    fields = ["nombre", "camada"]
+
+class CursoEliminar(DeleteView):
+    model = Curso
+    success_url = "/CoderApp/cursos/listar"
+    template_name = "CoderApp/eliminar_curso.html"
 
 def mostrar_cursos(request):
     cursos = Curso.objects.all()
@@ -58,3 +85,4 @@ def show_html(request):
     curso = Curso.objects.first()
     contexto = {"curso": curso, "nombre": "Fer"}
     return render(request, 'index.html', contexto)
+
