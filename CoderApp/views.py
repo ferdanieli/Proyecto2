@@ -1,6 +1,6 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
-from django.template.defaultfilters import register
 from django.utils.datastructures import MultiValueDictKeyError
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -49,7 +49,7 @@ def crear_curso(request):
 
     return redirect("/CoderApp/cursos.html")  # get
 
-
+@login_required
 def crear_curso_form(request):
     if request.method == "POST":
         curso_formulario = CursoForm(request.POST)

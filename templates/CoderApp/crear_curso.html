@@ -6,10 +6,8 @@
 
         {{ form.as_p }}
 
-        <h5><input type="submit"
-          value="{% if '/CoderApp/editar/' in request.path %}Editar{% elif '/CoderApp/crear' in request.path %}Crear{% endif %}">
-
-        </h5>
+        <h6><input type="submit"
+             value="{% if '/CoderApp/editar/' in request.path %}Editar{% elif '/CoderApp/crear' in request.path %}Crear{% endif %}"></h6>
 
 
         <!--    comment-->
