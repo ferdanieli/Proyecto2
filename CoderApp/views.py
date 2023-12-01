@@ -1,4 +1,6 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
+from django.template.defaultfilters import register
 from django.utils.datastructures import MultiValueDictKeyError
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -6,11 +8,12 @@ from CoderApp.models import Curso
 from CoderApp.forms import CursoForm, BuscarFormCurso
 
 
-class CursoList(ListView):
+
+class CursoList(LoginRequiredMixin, ListView):
     model = Curso
     template_name = "CoderApp/cursos_1.html"
 
-class CursoDetalle(DetailView):
+class CursoDetalle(LoginRequiredMixin, DetailView):
     model = Curso
     template_name = "CoderApp/curso_detalle.html"
 
@@ -44,7 +47,7 @@ def crear_curso(request):
     curso = Curso(nombre="Java", camada=65001)
     curso.save()
 
-    return redirect("/CoderApp/cursos/")  # get
+    return redirect("/CoderApp/cursos.html")  # get
 
 
 def crear_curso_form(request):

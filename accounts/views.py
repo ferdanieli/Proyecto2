@@ -1,6 +1,9 @@
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.shortcuts import render, redirect
+
+from accounts.forms import UserRegisterForm
+
 
 def login_request(request):
     if request.method == "POST":
@@ -25,3 +28,21 @@ def login_request(request):
         "form": form
     }
     return render(request, "accounts/login.html", contexto)
+
+def register_request(request):
+    if request.method == "POST":
+        # form = UserCreationForm(request.POST)
+        form = UserRegisterForm(request.POST)
+
+        if form.is_valid():
+
+            form.save()
+
+            return redirect("CursoList")
+
+    # form = UserCreationForm()
+    form = UserRegisterForm()
+    contexto = {
+        "form": form
+    }
+    return render(request, "accounts/registro.html", contexto)
