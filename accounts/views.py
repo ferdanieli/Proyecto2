@@ -1,8 +1,9 @@
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 
-from accounts.forms import UserRegisterForm
+from accounts.forms import UserRegisterForm, UserUpdateForm
 
 
 def login_request(request):
@@ -42,6 +43,26 @@ def register_request(request):
 
     # form = UserCreationForm()
     form = UserRegisterForm()
+    contexto = {
+        "form": form
+    }
+    return render(request, "accounts/registro.html", contexto)
+
+
+@login_required
+def editar_request(request):
+    user = request.user
+    if request.method == "POST":
+
+        form = UserUpdateForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            user.email = data["email"]
+            user.last_name = data["last_name"]
+            user.save()
+            return redirect("CursoList")
+
+    form = UserUpdateForm(initial={"email": user.email, "last_name": user.last_name})
     contexto = {
         "form": form
     }
